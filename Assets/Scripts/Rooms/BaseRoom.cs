@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -39,6 +40,12 @@ namespace Assets.Scripts.Rooms
             BuildRoom(renderPosition, tileSize, initialPosition);
         }
 
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
         public Vector3 SetInitialRenderPosition(Vector3 tileSize, out Vector3 initialPosition)
         {
             var playerPosition = Player.transform.position;
@@ -59,24 +66,30 @@ namespace Assets.Scripts.Rooms
             return tileSize;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         private void BuildRoom(Vector3 renderPosition, Vector3 tileSize, Vector3 initialPosition)
         {
-            for (float x = 0; x < Width; x++)
+            for (int x = 0; x < Width; x++)
             {
-                for (float y = 0; y < Height; y++)
+                Instantiate(WallTiles[0], renderPosition - new Vector3(0, 1), Quaternion.identity);
+                for (int y = 0; y < Height; y++)
                 {
                     Instantiate(FloorTiles[0], renderPosition, Quaternion.identity);
-                    renderPosition += new Vector3(0, tileSize.y, 0);
+                    AddSideWallTiles(renderPosition, x);
+                    renderPosition += new Vector3(0, tileSize.y);
                 }
+                Instantiate(WallTiles[0], renderPosition, Quaternion.identity);
                 renderPosition.x += tileSize.x;
                 renderPosition.y = initialPosition.y;
             }
+        }
+
+        private void AddSideWallTiles(Vector3 renderPosition, int x)
+        {
+            if (x == 0)
+                Instantiate(WallTiles[0], renderPosition - new Vector3(1, 0), Quaternion.identity);
+
+            if (Math.Abs(x - (Width - 1)) < 0.0001)
+                Instantiate(WallTiles[0], renderPosition + new Vector3(1, 0), Quaternion.identity);
         }
     }
 }

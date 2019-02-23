@@ -12,8 +12,8 @@ namespace Assets.Scripts.Rooms
             CurrentRoom = Instantiate(CurrentRoom);
             var baseRoom = CurrentRoom.GetComponent<BaseRoom>();
 
-            baseRoom.Width = Random.Range(3, 10);
-            baseRoom.Height = Random.Range(3, 10);
+            baseRoom.Width = Random.Range(10, 20);
+            baseRoom.Height = Random.Range(10, 20);
         }
 
         // Update is called once per frame
