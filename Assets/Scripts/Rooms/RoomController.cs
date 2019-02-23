@@ -4,7 +4,6 @@ namespace Assets.Scripts.Rooms
 {
     public class RoomController : MonoBehaviour
     {
-
         public GameObject CurrentRoom;
 
         // Use this for initialization
