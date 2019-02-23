@@ -1,6 +1,5 @@
 ﻿using Adic;
 using Assets.Scripts.Rooms;
-using Assets.Scripts.Rooms.Interfaces;
 
 namespace Assets.Scripts
 {
@@ -8,8 +7,6 @@ namespace Assets.Scripts
 
         public override void SetupContainers()
         {
-            this.AddContainer<InjectionContainer>()
-                .Bind<IRoom>().To<BaseRoom>();
         }
 
         public override void Init()

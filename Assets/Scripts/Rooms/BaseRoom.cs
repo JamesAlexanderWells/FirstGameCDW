@@ -1,15 +1,16 @@
-﻿using Assets.Scripts.Rooms.Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Rooms
 {
-    public class BaseRoom : MonoBehaviour, IRoom {
+    public class BaseRoom : MonoBehaviour
+    {
+        public GameObject[] DoorTiles;
 
-        public GameObject[] DoorTiles { get; set; }
+        public GameObject[] FloorTiles;
 
-        public GameObject[] FloorTiles { get; set; }
+        public GameObject[] WallTiles;
 
-        public GameObject[] WallTiles { get; set; }
+        public GameObject[] PrefabObjects; 
 
         // Use this for initialization
         void Start () {
