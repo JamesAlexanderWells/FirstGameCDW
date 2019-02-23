@@ -5,11 +5,14 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour {
 
     public float speed;
-    private bool wallFreeU = true;
-    private bool wallFreeD = true;
-    private bool wallFreeL = true;
-    private bool wallFreeR = true;
-
+    private bool wallFreeN = true;
+    private bool wallFreeS = true;
+    private bool wallFreeW = true;
+    private bool wallFreeE = true;
+    public GameObject bullet;
+    public int health;
+    public float fireRate;
+    private float nextFire;
     // Use this for initialization
     void Start()
     {
@@ -20,99 +23,112 @@ public class PlayerScript : MonoBehaviour {
     void FixedUpdate()
     {
         playerMovement();
-    }
-
-
-
-
-
-    private void playerMovement() {
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            if (wallFreeL)
-            {
-                transform.position += Vector3.left * speed * Time.deltaTime;
-            }
-            else
-            {
-                //wallFree = true;
-            }
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            if (wallFreeR)
-            {
-                transform.position += Vector3.right * speed * Time.deltaTime;
-            }
-            else
-            {
-                //wallFree = true;
-            }
-        }
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            if (wallFreeU)
-            {
-                transform.position += Vector3.up * speed * Time.deltaTime;
-            }
-            else
-            {
-                //wallFree = true;
-            }
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            if (wallFreeD)
-            {
-                transform.position += Vector3.down * speed * Time.deltaTime;
-            }
-            else
-            {
-
-            }
-        }
-        wallFreeU = true;
-        wallFreeD = true;
-        wallFreeL = true;
-        wallFreeR = true;
-
+        playerShooting();
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
-        wallStop();
-
+        if (other.name.Contains("wall"))
+        {
+            playerWall(other);
+        }
 
     }
 
-    private void wallStop(){
-
-        if (Input.GetKey(KeyCode.LeftArrow))
+    private void playerShooting()
+    {
+        if (Input.GetKey(KeyCode.LeftArrow) && Time.time > nextFire)
         {
-            wallFreeL = false;
+            GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.identity);
+            nextFire = Time.time + fireRate;
+            bullet.GetComponent<BulletScript>().way = BulletScript.direction.west;
+        }
+        if (Input.GetKey(KeyCode.RightArrow) && Time.time > nextFire)
+        {
+            GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.identity);
+            nextFire = Time.time + fireRate;
+            bullet.GetComponent<BulletScript>().way = BulletScript.direction.east;
+
+        }
+        if (Input.GetKey(KeyCode.UpArrow) && Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.identity);
+            bullet.GetComponent<BulletScript>().way = BulletScript.direction.north;
+        }
+        if (Input.GetKey(KeyCode.DownArrow) && Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.identity);
+            bullet.GetComponent<BulletScript>().way = BulletScript.direction.south;
+            Instantiate(bullet);
+        }
+
+    }
+
+    private void playerWall(Collider2D other)
+    {
+        if (other.name.Contains("wall west"))
+        {
+            wallFreeW = false;
             transform.position -= Vector3.left * speed * Time.deltaTime;
-
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (other.name.Contains("wall east"))
         {
-            wallFreeR = false;
+            wallFreeE = false;
             transform.position -= Vector3.right * speed * Time.deltaTime;
-
         }
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (other.name.Contains("wall north"))
         {
-            wallFreeU = false;
+            wallFreeN = false;
             transform.position -= Vector3.up * speed * Time.deltaTime;
-
         }
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (other.name.Contains("wall south"))
         {
-            wallFreeD = false;
+            wallFreeS = false;
             transform.position -= Vector3.down * speed * Time.deltaTime;
-
         }
     }
 
-    
+
+
+    private void playerMovement()
+    {
+
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            if (wallFreeW)
+            {
+                transform.position += Vector3.left * speed * Time.deltaTime;
+            }
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            if (wallFreeE)
+            {
+                transform.position += Vector3.right * speed * Time.deltaTime;
+            }
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            if (wallFreeN)
+            {
+                transform.position += Vector3.up * speed * Time.deltaTime;
+            }
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            if (wallFreeS)
+            {
+                transform.position += Vector3.down * speed * Time.deltaTime;
+            }
+        }
+        wallFreeN = true;
+        wallFreeS = true;
+        wallFreeW = true;
+        wallFreeE = true;
+    }
+
+
 }
