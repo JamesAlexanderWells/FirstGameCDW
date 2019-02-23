@@ -9,85 +9,111 @@ public class Worm : MonoBehaviour
 {
     public Transform target;
     public float speed;
-    private bool moveU = false;
-    private bool moveD = false;
-    private bool moveL = false;
-    private bool moveR = false;
+    public bool moveU = false;
+    public bool moveD = false;
+    public bool moveL = false;
+    public bool moveR = false;
     public float r;
     private float xDistance;
     private float yDistance;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        anim = GetComponent<Animator>();
         xDistance = target.position.x - transform.position.x;
         yDistance = target.position.y - transform.position.y;
+        Vector3 theScale = transform.localScale;
+        Debug.Log(theScale.x);
         if (moveU)
         {
             transform.position -= Vector3.down * speed * Time.deltaTime;
+            anim.SetBool("isRight", false);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isUp", true);
+            anim.SetBool("isDown", false);
+            theScale.x = 1;
+            transform.localScale = theScale;
         }
         if (moveD)
         {
             transform.position -= Vector3.up * speed * Time.deltaTime;
-        }
-        if (moveL)
-        {
-            transform.position -= Vector3.left * speed * Time.deltaTime;
+            anim.SetBool("isRight", false);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isUp", false);
+            anim.SetBool("isDown", true);
+            theScale.x = 1;
+            transform.localScale = theScale;
         }
         if (moveR)
         {
+            transform.position -= Vector3.left * speed * Time.deltaTime;
+            anim.SetBool("isRight", true);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isUp", false);
+            anim.SetBool("isDown", false);
+            theScale.x = 1;
+            transform.localScale = theScale;
+        }
+        if (moveL)
+        {
+            theScale.x = -1;
+            transform.localScale = theScale;
             transform.position -= Vector3.right * speed * Time.deltaTime;
+            anim.SetBool("isRight", false);
+            anim.SetBool("isLeft", true);
+            anim.SetBool("isUp", false);
+            anim.SetBool("isDown", false);
         }
         if (r == 0)
         {
             moveU = true;
             moveD = false;
-            moveL = false;
             moveR = false;
+            moveL = false;
         }
         if (r == 1)
         {
             moveU = false;
             moveD = true;
-            moveL = false;
             moveR = false;
+            moveL = false;
         }
         if (r == 2)
         {
             moveU = false;
             moveD = false;
-            moveL = true;
-            moveR = false;
+            moveR = true;
+            moveL = false;
         }
         if (r == 3)
         {
             moveU = false;
             moveD = false;
-            moveL = false;
-            moveR = true;
+            moveR = false;
+            moveL = true;
         }
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
 
-        Debug.Log(col.gameObject.tag);
         if (col.gameObject.tag == "Scenery")
         {
             if (xDistance > -xDistance)
             {
-                if(xDistance > yDistance)
+                if (xDistance > yDistance)
                 {
                     if (xDistance > -yDistance)
                     {
-                        if (!moveL)
+                        if (!moveR)
                             r = 2;
                         else
                             r = 1;
@@ -96,23 +122,37 @@ public class Worm : MonoBehaviour
             }
             else if (-xDistance > yDistance)
             {
-                if(-xDistance > - yDistance)
+                if (-xDistance > -yDistance)
                 {
-                    if (!moveR)
+                    if (!moveL)
                         r = 3;
                     else
                         r = 0;
                 }
             }
-            else if (yDistance > -yDistance)
+            if (yDistance > -yDistance)
             {
-                r = 0;
+                if (yDistance > xDistance)
+                {
+                    if (yDistance > -xDistance)
+                    {
+                        if (!moveU)
+                            r = 0;
+                        else
+                            r = 2;
+                    }
+                }
             }
-            else
+            else if (-yDistance > xDistance)
             {
-                r = 1;
+                if (-yDistance > -xDistance)
+                {
+                    if (!moveD)
+                        r = 1;
+                    else
+                        r = 3;
+                }
             }
-            
         }
     }
 }
