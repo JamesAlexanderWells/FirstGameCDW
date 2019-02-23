@@ -74,7 +74,7 @@ namespace Assets.Scripts.Rooms
                 for (int y = 0; y < Height; y++)
                 {
                     Instantiate(FloorTiles[0], renderPosition, Quaternion.identity);
-                    AddSideWallTiles(renderPosition, x);
+                    AddSideWallTiles(renderPosition, x, y);
                     renderPosition += new Vector3(0, tileSize.y);
                 }
                 Instantiate(WallTiles[0], renderPosition, Quaternion.identity);
@@ -83,13 +83,23 @@ namespace Assets.Scripts.Rooms
             }
         }
 
-        private void AddSideWallTiles(Vector3 renderPosition, int x)
+        private void AddSideWallTiles(Vector3 renderPosition, int x, int y)
         {
             if (x == 0)
+            {
                 Instantiate(WallTiles[0], renderPosition - new Vector3(1, 0), Quaternion.identity);
 
+                if(y == 0)
+                    Instantiate(WallTiles[0], renderPosition - new Vector3(1, 1), Quaternion.identity);
+
+                if (Math.Abs(y - (Height - 1)) < 0.001)
+                    Instantiate(WallTiles[0], renderPosition + new Vector3(-1, 1), Quaternion.identity);
+            }
+
             if (Math.Abs(x - (Width - 1)) < 0.0001)
+            {
                 Instantiate(WallTiles[0], renderPosition + new Vector3(1, 0), Quaternion.identity);
+            }
         }
     }
 }
