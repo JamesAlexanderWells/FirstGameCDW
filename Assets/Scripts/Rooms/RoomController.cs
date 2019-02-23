@@ -12,6 +12,7 @@ namespace Assets.Scripts.Rooms
             CurrentRoom = Instantiate(CurrentRoom);
             var baseRoom = CurrentRoom.GetComponent<BaseRoom>();
 
+            baseRoom.Player = GameObject.Find("dummyPlayer");
             baseRoom.Width = Random.Range(10, 20);
             baseRoom.Height = Random.Range(10, 20);
         }
