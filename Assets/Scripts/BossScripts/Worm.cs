@@ -21,13 +21,13 @@ public class Worm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        anim = GetComponent<Animator>();
+        
         xDistance = target.position.x - transform.position.x;
         yDistance = target.position.y - transform.position.y;
         Vector3 theScale = transform.localScale;
