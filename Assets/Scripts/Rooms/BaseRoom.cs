@@ -34,7 +34,7 @@ namespace Assets.Scripts.Rooms
         void Start()
         {
             Vector3 initialPosition;
-            var tileSize = GetTileSize();
+            var tileSize = GetFloorTileSize();
 
             var renderPosition = SetInitialRenderPosition(tileSize, out initialPosition);
             BuildRoom(renderPosition, tileSize, initialPosition);
@@ -59,7 +59,7 @@ namespace Assets.Scripts.Rooms
                 playerPosition.y - 0.5f * (Height * tileSize.y), 0);
         }
 
-        public Vector3 GetTileSize()
+        public Vector3 GetFloorTileSize()
         {
             var tileRenderer = FloorTiles[0].GetComponent<Renderer>();
             var tileSize = tileRenderer.bounds.size;
@@ -70,11 +70,11 @@ namespace Assets.Scripts.Rooms
         {
             for (int x = 0; x < Width; x++)
             {
-                Instantiate(WallTiles[0], renderPosition - new Vector3(0, 1), Quaternion.identity);
+                Instantiate(WallTiles[0], renderPosition - new Vector3(0, 1 * tileSize.y), Quaternion.identity);
                 for (int y = 0; y < Height; y++)
                 {
                     Instantiate(FloorTiles[0], renderPosition, Quaternion.identity);
-                    AddSideWallTiles(renderPosition, x, y);
+                    AddSideWallTiles(renderPosition, x, y, tileSize);
                     renderPosition += new Vector3(0, tileSize.y);
                 }
                 Instantiate(WallTiles[0], renderPosition, Quaternion.identity);
@@ -83,22 +83,28 @@ namespace Assets.Scripts.Rooms
             }
         }
 
-        private void AddSideWallTiles(Vector3 renderPosition, int x, int y)
+        private void AddSideWallTiles(Vector3 renderPosition, int x, int y, Vector3 tileSize)
         {
             if (x == 0)
             {
-                Instantiate(WallTiles[0], renderPosition - new Vector3(1, 0), Quaternion.identity);
+                Instantiate(WallTiles[0], renderPosition - new Vector3(1 * tileSize.x, 0), Quaternion.identity);
 
                 if(y == 0)
-                    Instantiate(WallTiles[0], renderPosition - new Vector3(1, 1), Quaternion.identity);
+                    Instantiate(WallTiles[0], renderPosition + new Vector3(-1 * tileSize.x, -1 * tileSize.y), Quaternion.identity);
 
                 if (Math.Abs(y - (Height - 1)) < 0.001)
-                    Instantiate(WallTiles[0], renderPosition + new Vector3(-1, 1), Quaternion.identity);
+                    Instantiate(WallTiles[0], renderPosition + new Vector3(-1 * tileSize.x, 1 * tileSize.y), Quaternion.identity);
             }
 
             if (Math.Abs(x - (Width - 1)) < 0.0001)
             {
-                Instantiate(WallTiles[0], renderPosition + new Vector3(1, 0), Quaternion.identity);
+                Instantiate(WallTiles[0], renderPosition + new Vector3(1 * tileSize.x, 0), Quaternion.identity);
+
+                if (y == 0)
+                    Instantiate(WallTiles[0], renderPosition + new Vector3(1 * tileSize.x, -1 * tileSize.y), Quaternion.identity);
+
+                if (Math.Abs(y - (Height - 1)) < 0.001)
+                    Instantiate(WallTiles[0], renderPosition + new Vector3(1 * tileSize.x, 1 * tileSize.y), Quaternion.identity);
             }
         }
     }
