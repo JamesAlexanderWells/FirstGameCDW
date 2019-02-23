@@ -2,23 +2,25 @@
 
 namespace Assets.Scripts.Rooms
 {
-    public class RoomController : MonoBehaviour {
+    public class RoomController : MonoBehaviour
+    {
 
-        private readonly BaseRoom _currentRoom;
-
-        public RoomController(BaseRoom currentRoom)
-        {
-            _currentRoom = currentRoom;
-        }
+        public GameObject CurrentRoom;
 
         // Use this for initialization
-        void Start () {
-		
+        void Start()
+        {
+            CurrentRoom = Instantiate(CurrentRoom);
+            var baseRoom = CurrentRoom.GetComponent<BaseRoom>();
+
+            baseRoom.Width = Random.Range(3, 10);
+            baseRoom.Height = Random.Range(3, 10);
         }
-	
+
         // Update is called once per frame
-        void Update () {
-		
+        void Update()
+        {
+
         }
     }
 }
