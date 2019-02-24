@@ -17,7 +17,7 @@ public class BulletScript : MonoBehaviour {
     public direction way = direction.stop;
 
 
-
+    public SpriteRenderer ownSprite;
     // Use this for initialization
     void Start()
     {
