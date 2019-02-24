@@ -17,8 +17,11 @@ namespace Assets.Scripts.Rooms
             baseRoom.Player = GameObject.Find("dummyPlayer");
 
             Random.InitState(DateTime.Now.Millisecond);
-            baseRoom.Width = Random.Range(10, 20);
-            baseRoom.Height = Random.Range(10, 20);
+            var roomWidth = Random.Range(10, 20);
+            var roomHeight = Random.Range(10, 20);
+
+            baseRoom.Width = (roomWidth % 2) != 0 ? roomWidth : roomWidth - 1;
+            baseRoom.Height = (roomHeight % 2) != 0 ? roomHeight : roomHeight - 1;
         }
 
         // Update is called once per frame
