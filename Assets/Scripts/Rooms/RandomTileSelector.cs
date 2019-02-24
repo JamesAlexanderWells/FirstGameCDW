@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using UnityEngine;
 using Random = System.Random;
 using UnityRandom = UnityEngine.Random;
@@ -17,7 +15,7 @@ namespace Assets.Scripts.Rooms
 
         public RandomTileSelector(List<GameObject> tiles)
         {
-            Random = new Random(DateTime.Now.Millisecond);
+            Random = new Random(Guid.NewGuid().GetHashCode());
             Tiles = tiles;
         }
 
@@ -27,9 +25,15 @@ namespace Assets.Scripts.Rooms
             return Tiles[index];
         }
 
+        public bool GetProbabilisticChoice(float threshold)
+        {
+            var generate = (float)Random.NextDouble();
+            return generate > threshold;
+        }
+
         public Vector3 GetRandomVectorInSpace(GameObject[] tileSpace)
         {
-            UnityRandom.InitState(DateTime.Now.Millisecond);
+            UnityRandom.InitState(Guid.NewGuid().GetHashCode());
             var minXPosition = tileSpace.Min(x => x.transform.position.x);
             var maxXPosition = tileSpace.Max(x => x.transform.position.x);
 
