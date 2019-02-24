@@ -57,5 +57,6 @@ MonoBehaviour:
   - {fileID: 1823795302665200, guid: 37081d8084ecf36489ac6f55172f6290, type: 2}
   WallTiles:
   - {fileID: 1783457662588924, guid: b7bc1391031cdaf43bb6a684bce543de, type: 2}
-  PrefabObjects: []
+  PrefabObjects:
+  - {fileID: 1467885724965604, guid: 4ba10232f4bb83244b501e2f3599d42e, type: 2}
   Player: {fileID: 0}
