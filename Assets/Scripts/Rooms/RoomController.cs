@@ -11,12 +11,7 @@ namespace Assets.Scripts.Rooms
         // Use this for initialization
         void Start()
         {
-            // Lets find another way some day.
-            var getBaseRoom = Resources.Load("BaseRoom") as GameObject;
-            var getDirt = Resources.Load("Dirt") as GameObject;
-            var getWall = Resources.Load("Wall") as GameObject;
-
-            CurrentRoom = Instantiate(getBaseRoom);
+            CurrentRoom = Instantiate(CurrentRoom);
             var baseRoom = CurrentRoom.GetComponent<BaseRoom>();
 
             baseRoom.Player = GameObject.Find("dummyPlayer");
@@ -24,9 +19,6 @@ namespace Assets.Scripts.Rooms
             Random.InitState(DateTime.Now.Millisecond);
             baseRoom.Width = Random.Range(10, 20);
             baseRoom.Height = Random.Range(10, 20);
-
-            baseRoom.FloorTiles.Add(getDirt);
-            baseRoom.WallTiles.Add(getWall);
         }
 
         // Update is called once per frame
