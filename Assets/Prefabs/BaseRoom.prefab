@@ -53,8 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DoorTiles: []
   FloorTiles:
-  - {fileID: 1823795302665200, guid: 37081d8084ecf36489ac6f55172f6290, type: 2}
+  - {fileID: 0}
   WallTiles:
-  - {fileID: 1783457662588924, guid: b7bc1391031cdaf43bb6a684bce543de, type: 2}
+  - {fileID: 0}
   PrefabObjects: []
   Player: {fileID: 0}
