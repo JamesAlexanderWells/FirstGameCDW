@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Rooms
 {
@@ -18,6 +20,8 @@ namespace Assets.Scripts.Rooms
             var baseRoom = CurrentRoom.GetComponent<BaseRoom>();
 
             baseRoom.Player = GameObject.Find("dummyPlayer");
+
+            Random.InitState(DateTime.Now.Millisecond);
             baseRoom.Width = Random.Range(10, 20);
             baseRoom.Height = Random.Range(10, 20);
 
