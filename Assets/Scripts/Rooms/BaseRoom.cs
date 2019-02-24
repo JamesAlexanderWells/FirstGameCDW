@@ -36,7 +36,6 @@ namespace Assets.Scripts.Rooms
             PrefabObjects = new List<GameObject>();
         }
 
-        // Use this for initialization
         void Start()
         {
             Vector3 initialPosition;
@@ -44,12 +43,6 @@ namespace Assets.Scripts.Rooms
 
             var renderPosition = SetInitialRenderPosition(out initialPosition);
             BuildRoom(renderPosition, initialPosition);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
 
         public Vector3 SetInitialRenderPosition(out Vector3 initialPosition)
@@ -78,16 +71,30 @@ namespace Assets.Scripts.Rooms
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    if (x == 0 || y == 0 || Math.Abs(x - (Width - 1)) < Tolerance || Math.Abs(y - (Height - 1)) < Tolerance)
+                    if ((x == 0 && IsRoomEnd(y - (Height - 1) / 2f) ||
+                        (y == 0 && IsRoomEnd(x - (Width - 1) / 2f)) ||
+                        (IsRoomEnd(x - (Width - 1)) && IsRoomEnd(y - (Height - 1) / 2f)) ||
+                        (IsRoomEnd(y - (Height - 1)) && IsRoomEnd(x - (Width - 1) / 2f))))
                     {
-                        AddTile(WallTiles[0], ref renderPosition);
+                        AddTile(new RandomTileSelector(DoorTiles).GetRandomTile(), ref renderPosition);
                         continue;
                     }
-                    AddTile(FloorTiles[0], ref renderPosition);
+
+                    if (x == 0 || y == 0 || IsRoomEnd(x - (Width - 1)) || IsRoomEnd(y - (Height - 1)))
+                    {
+                        AddTile(new RandomTileSelector(WallTiles).GetRandomTile(), ref renderPosition);
+                        continue;
+                    }
+                    AddTile(new RandomTileSelector(FloorTiles).GetRandomTile(), ref renderPosition);
                 }
                 renderPosition.x += TileSize.x;
                 renderPosition.y = initialPosition.y;
             }
+        }
+
+        private bool IsRoomEnd(float expression)
+        {
+            return Math.Abs(expression) < Tolerance;
         }
 
         private void AddTile(GameObject tile, ref Vector3 renderPosition)
