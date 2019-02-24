@@ -5,18 +5,24 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour {
 
     public float speed;
+    public float damage;
     private bool wallFreeN = true;
     private bool wallFreeS = true;
     private bool wallFreeW = true;
     private bool wallFreeE = true;
     public GameObject bullet;
-    public int health;
+    public int maxHealth;
+    public int currentHealth;
     public float fireRate;
     private float nextFire;
+    public List<PickUpScript> pickUpList = new List<PickUpScript>();
+    Vector3 startPos;
+    public Rigidbody2D rigidbody;
     // Use this for initialization
     void Start()
     {
-
+        startPos = this.transform.position;
+        rigidbody.freezeRotation = true;
     }
 
 
@@ -26,14 +32,7 @@ public class PlayerScript : MonoBehaviour {
         playerShooting();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.name.Contains("wall"))
-        {
-            playerWall(other);
-        }
 
-    }
 
     private void playerShooting()
     {
@@ -41,12 +40,14 @@ public class PlayerScript : MonoBehaviour {
         {
             GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.identity);
             nextFire = Time.time + fireRate;
+            bullet.transform.position = transform.position;
             bullet.GetComponent<BulletScript>().way = BulletScript.direction.west;
         }
         if (Input.GetKey(KeyCode.RightArrow) && Time.time > nextFire)
         {
             GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.identity);
             nextFire = Time.time + fireRate;
+            //bullet.transform.position = transform.position;
             bullet.GetComponent<BulletScript>().way = BulletScript.direction.east;
 
         }
@@ -54,81 +55,59 @@ public class PlayerScript : MonoBehaviour {
         {
             nextFire = Time.time + fireRate;
             GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.identity);
+            bullet.transform.position = transform.position;
             bullet.GetComponent<BulletScript>().way = BulletScript.direction.north;
         }
         if (Input.GetKey(KeyCode.DownArrow) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.identity);
+            bullet.transform.position = transform.position;
             bullet.GetComponent<BulletScript>().way = BulletScript.direction.south;
             Instantiate(bullet);
         }
 
     }
 
-    private void playerWall(Collider2D other)
-    {
-        if (other.name.Contains("wall west"))
-        {
-            wallFreeW = false;
-            transform.position -= Vector3.left * speed * Time.deltaTime;
-        }
-        if (other.name.Contains("wall east"))
-        {
-            wallFreeE = false;
-            transform.position -= Vector3.right * speed * Time.deltaTime;
-        }
-        if (other.name.Contains("wall north"))
-        {
-            wallFreeN = false;
-            transform.position -= Vector3.up * speed * Time.deltaTime;
-        }
-        if (other.name.Contains("wall south"))
-        {
-            wallFreeS = false;
-            transform.position -= Vector3.down * speed * Time.deltaTime;
-        }
-    }
+
 
 
 
     private void playerMovement()
     {
-
+        float y = 0;
+        float x = 0;
 
         if (Input.GetKey(KeyCode.A))
         {
             if (wallFreeW)
             {
-                transform.position += Vector3.left * speed * Time.deltaTime;
+
+                x -= speed;
             }
         }
         if (Input.GetKey(KeyCode.D))
         {
             if (wallFreeE)
             {
-                transform.position += Vector3.right * speed * Time.deltaTime;
+                x += speed;
             }
         }
         if (Input.GetKey(KeyCode.W))
         {
             if (wallFreeN)
             {
-                transform.position += Vector3.up * speed * Time.deltaTime;
+                y += speed;
             }
         }
         if (Input.GetKey(KeyCode.S))
         {
             if (wallFreeS)
             {
-                transform.position += Vector3.down * speed * Time.deltaTime;
+                y -= speed;
             }
         }
-        wallFreeN = true;
-        wallFreeS = true;
-        wallFreeW = true;
-        wallFreeE = true;
+        rigidbody.velocity = new Vector3(x, y, 0);
     }
-
 
 }

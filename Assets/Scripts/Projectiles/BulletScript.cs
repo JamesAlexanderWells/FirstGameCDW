@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour {
-
     public float speed;
 
     public enum direction
@@ -57,7 +56,7 @@ public class BulletScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D thing)
     {
-        if (thing.name.Contains("wall"))
+        if (thing.name.Contains("Wall"))
         {
             Destroy(this.gameObject);
         }
