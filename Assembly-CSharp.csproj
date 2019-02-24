@@ -154,9 +154,11 @@
      <Compile Include="Assets\Scripts\BossScripts\Mantis.cs" />
      <Compile Include="Assets\Scripts\BossScripts\Worm.cs" />
      <Compile Include="Assets\Scripts\CharecterScripts\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\Enumerations\PreviousDoor.cs" />
      <Compile Include="Assets\Scripts\ItemScripts\PickUpScript.cs" />
      <Compile Include="Assets\Scripts\Projectiles\BulletScript.cs" />
      <Compile Include="Assets\Scripts\Rooms\BaseRoom.cs" />
+     <Compile Include="Assets\Scripts\Rooms\NormalRoom.cs" />
      <Compile Include="Assets\Scripts\Rooms\RandomTileSelector.cs" />
      <Compile Include="Assets\Scripts\Rooms\RoomController.cs" />
      <None Include="Assets\Adic\CHANGELOG.txt" />

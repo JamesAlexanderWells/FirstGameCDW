@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Scripts.Enumerations;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -21,6 +22,8 @@ namespace Assets.Scripts.Rooms
         public List<GameObject> PrefabObjects;
 
         public GameObject Player;
+
+        public PreviousDoor ExitDoor;
 
 
         public float Width { get; set; }
