@@ -1,5 +1,4 @@
 using UnityEngine;
-using Adic;
 
 namespace Adic.Examples.Prefabs {
     /// <summary>

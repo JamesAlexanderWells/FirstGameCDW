@@ -1,5 +1,3 @@
-using UnityEngine;
-using Adic;
 using Adic.Examples.Factory.Commands;
 
 namespace Adic.Examples.Factory {

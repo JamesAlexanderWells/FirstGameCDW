@@ -1,6 +1,3 @@
-using UnityEngine;
-using System;
-using Adic;
 using Adic.Container;
 
 namespace Adic.Extensions.MonoInjection {

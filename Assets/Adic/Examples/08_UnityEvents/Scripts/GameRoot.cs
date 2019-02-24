@@ -1,6 +1,3 @@
-using UnityEngine;
-using Adic;
-
 namespace Adic.Examples.Events {
     /// <summary>
     /// Game context root.

@@ -1,4 +1,3 @@
-using System;
 using Adic.Injection;
 
 namespace Adic {

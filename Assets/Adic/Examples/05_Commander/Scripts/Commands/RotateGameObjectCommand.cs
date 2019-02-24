@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using Adic;
 
 namespace Adic.Examples.Commander.Commands {
     /// <summary>

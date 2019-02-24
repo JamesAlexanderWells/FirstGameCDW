@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Assets.Scripts.Enumerations;
+﻿using Assets.Scripts.Enumerations;
 using UnityEngine;
 
 namespace Assets.Scripts.Rooms

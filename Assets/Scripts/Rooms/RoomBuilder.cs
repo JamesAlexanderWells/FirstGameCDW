@@ -1,0 +1,100 @@
+﻿using System;
+using Assets.Scripts.Rooms.Models;
+using UnityEngine;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
+
+namespace Assets.Scripts.Rooms
+{
+    public class RoomBuilder
+    {
+        public const float Tolerance = 0.0001f;
+
+        private float widthBound;
+
+        private float heightBound;
+
+        private Vector3 tileSize;
+
+        private Vector3 initialPosition;
+
+        private Vector3 renderPosition;
+
+        private RoomAssetSet assets;
+
+        public RoomBuilder(float widthBound, float heightBound, Vector3 tileSize, Vector3 initialPosition, Vector3 renderPosition, RoomAssetSet assets)
+        {
+            this.widthBound = widthBound;
+            this.heightBound = heightBound;
+            this.tileSize = tileSize;
+            this.initialPosition = initialPosition;
+            this.renderPosition = renderPosition;
+            this.assets = assets;
+        }
+
+        public void Build()
+        {
+            for (int x = 0; x < widthBound; x++)
+            {
+                for (int y = 0; y < heightBound; y++)
+                {
+                    if (DetectDoorCases(x, y))
+                    {
+                        var selector = new RandomTileSelector(assets.DoorTiles);
+                        if (selector.GetProbabilisticChoice(0.5f))
+                            AddRoomTile(selector.GetRandomTile(), ref renderPosition);
+
+                        else
+                        {
+                            selector.Tiles = assets.WallTiles;
+                            AddRoomTile(selector.GetRandomTile(), ref renderPosition);
+                        }
+                        continue;
+                    }
+
+                    if (x == 0 || y == 0 || IsRoomEnd(x - (widthBound - 1)) || IsRoomEnd(y - (heightBound - 1)))
+                    {
+                        AddRoomTile(new RandomTileSelector(assets.WallTiles).GetRandomTile(), ref renderPosition);
+                        continue;
+                    }
+                    AddRoomTile(new RandomTileSelector(assets.FloorTiles).GetRandomTile(), ref renderPosition);
+                }
+                renderPosition.x += tileSize.x;
+                renderPosition.y = initialPosition.y;
+            }
+            BuildRandomPrefabs();
+        }
+
+        private void BuildRandomPrefabs()
+        {
+            Random.InitState(Guid.NewGuid().GetHashCode());
+            var noOfRandomPrefabs = Random.Range(1, 6);
+
+            for (int i = 0; i < noOfRandomPrefabs; i++)
+            {
+                var selector = new RandomTileSelector(assets.PrefabTiles);
+                Object.Instantiate(selector.GetRandomTile(), selector.GetRandomVectorInSpace(GameObject.FindGameObjectsWithTag("Floor")), Quaternion.identity);
+            }
+        }
+
+        private bool DetectDoorCases(int x, int y)
+        {
+            return
+                x == 0 && IsRoomEnd(y - (heightBound - 1) / 2f) ||
+                y == 0 && IsRoomEnd(x - (widthBound - 1) / 2f) ||
+                IsRoomEnd(x - (widthBound - 1)) && IsRoomEnd(y - (heightBound - 1) / 2f) ||
+                IsRoomEnd(y - (heightBound - 1)) && IsRoomEnd(x - (widthBound - 1) / 2f);
+        }
+
+        private bool IsRoomEnd(float expression)
+        {
+            return Math.Abs(expression) < Tolerance;
+        }
+
+        private void AddRoomTile(GameObject tile, ref Vector3 renderPosition)
+        {
+            Object.Instantiate(tile, renderPosition, Quaternion.identity);
+            renderPosition += new Vector3(0, tileSize.y);
+        }
+    }
+}

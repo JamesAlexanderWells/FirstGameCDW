@@ -1,5 +1,3 @@
-using System;
-
 namespace Adic.Container {
     /// <summary>
     /// Defines an extension for an <see cref="Adic.InjectionContainer"/>.

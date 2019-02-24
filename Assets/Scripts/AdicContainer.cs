@@ -1,5 +1,4 @@
 ﻿using Adic;
-using Assets.Scripts.Rooms;
 
 namespace Assets.Scripts
 {

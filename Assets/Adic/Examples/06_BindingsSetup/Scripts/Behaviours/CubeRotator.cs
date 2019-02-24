@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using Adic.Examples.BindingsSetup.Data;
 
 namespace Adic.Examples.BindingsSetup.Behaviours {

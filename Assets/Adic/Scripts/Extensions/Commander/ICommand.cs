@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-namespace Adic {
+﻿namespace Adic {
 	/// <summary>
 	/// Represents a command.
 	/// </summary>

@@ -1,6 +1,3 @@
-using UnityEngine;
-using Adic;
-
 namespace Adic.Examples.BindingsSetup {
     /// <summary>
     /// Game context root.

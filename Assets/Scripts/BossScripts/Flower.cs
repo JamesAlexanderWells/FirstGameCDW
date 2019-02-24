@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using Assets.Scripts.Rooms;
+﻿using UnityEngine;
 
 public class Flower : MonoBehaviour
 {

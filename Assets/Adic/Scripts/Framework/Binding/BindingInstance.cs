@@ -1,5 +1,3 @@
-using System;
-
 namespace Adic.Binding {
 	/// <summary>
 	/// Binding instance type.

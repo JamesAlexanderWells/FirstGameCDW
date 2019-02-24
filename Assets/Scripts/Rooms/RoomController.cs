@@ -16,7 +16,7 @@ namespace Assets.Scripts.Rooms
 
             baseRoom.Player = GameObject.Find("dummyPlayer");
 
-            Random.InitState(DateTime.Now.Millisecond);
+            Random.InitState(Guid.NewGuid().GetHashCode());
             var roomWidth = Random.Range(10, 40);
             var roomHeight = Random.Range(10, 40);
 

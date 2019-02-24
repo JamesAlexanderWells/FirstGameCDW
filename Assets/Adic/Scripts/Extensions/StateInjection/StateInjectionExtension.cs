@@ -1,7 +1,3 @@
-using UnityEngine;
-using Adic;
-using Adic.Extensions.MonoInjection;
-
 #if UNITY_5
 
 /// <summary>

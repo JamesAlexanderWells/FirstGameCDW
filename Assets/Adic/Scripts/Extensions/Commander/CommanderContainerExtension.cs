@@ -1,11 +1,4 @@
-using UnityEngine;
-using System;
-using System.Collections;
-using Adic.Binding;
 using Adic.Container;
-using Adic.Exceptions;
-using Adic.Injection;
-using Adic.Util;
 
 namespace Adic {
 	/// <summary>

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Adic.Container;
-using Adic.Examples.Factory.Behaviours;
 
 namespace Adic.Examples.Factory.Commands {
     /// <summary>

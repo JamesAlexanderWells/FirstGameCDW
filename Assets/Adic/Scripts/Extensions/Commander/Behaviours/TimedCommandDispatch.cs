@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System;
-using Adic.Container;
 
 namespace Adic.Commander.Behaviours {
     /// <summary>

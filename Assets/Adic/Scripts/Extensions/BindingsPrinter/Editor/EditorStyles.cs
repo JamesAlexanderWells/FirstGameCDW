@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
-using System;
 
 namespace Adic.Extenstions.BindingsPrinter {
     /// <summary>

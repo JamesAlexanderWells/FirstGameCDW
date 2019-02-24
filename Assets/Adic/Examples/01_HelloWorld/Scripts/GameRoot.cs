@@ -1,6 +1,3 @@
-using UnityEngine;
-using Adic;
-
 namespace Adic.Examples.HelloWorld {
     /// <summary>
     /// Game context root.

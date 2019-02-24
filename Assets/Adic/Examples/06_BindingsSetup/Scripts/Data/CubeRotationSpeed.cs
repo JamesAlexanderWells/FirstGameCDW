@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-namespace Adic.Examples.BindingsSetup.Data {
+﻿namespace Adic.Examples.BindingsSetup.Data {
     /// <summary>
     /// Cube rotation speed value object.
     /// </summary>

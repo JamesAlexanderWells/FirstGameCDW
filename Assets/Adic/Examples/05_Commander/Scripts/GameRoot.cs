@@ -1,5 +1,4 @@
 using UnityEngine;
-using Adic;
 using Adic.Examples.Commander.Commands;
 
 namespace Adic.Examples.Commander {

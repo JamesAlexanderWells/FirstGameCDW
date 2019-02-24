@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Adic.Util {
+﻿namespace Adic.Util {
     /// <summary>
     /// Delegate for a constructor call without parameters.
     /// </summary>
