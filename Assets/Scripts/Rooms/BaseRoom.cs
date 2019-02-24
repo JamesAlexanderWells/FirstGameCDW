@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Rooms
 {
@@ -89,6 +90,19 @@ namespace Assets.Scripts.Rooms
                 }
                 renderPosition.x += TileSize.x;
                 renderPosition.y = initialPosition.y;
+            }
+            BuildRandomPrefabs();
+        }
+
+        private void BuildRandomPrefabs()
+        {
+            Random.InitState(DateTime.Now.Millisecond);
+            var noOfRandomPrefabs = Random.Range(1, 6);
+
+            for (int i = 0; i < noOfRandomPrefabs; i++)
+            {
+                var selector = new RandomTileSelector(PrefabObjects);
+                Instantiate(selector.GetRandomTile(), selector.GetRandomVectorInSpace(GameObject.FindGameObjectsWithTag("Floor")), Quaternion.identity);
             }
         }
 
