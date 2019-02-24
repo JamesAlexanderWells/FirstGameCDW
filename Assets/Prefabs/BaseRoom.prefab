@@ -51,7 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc723a2d5ecf9a94a962caead4b635e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoorTiles: []
+  DoorTiles:
+  - {fileID: 1655151654254436, guid: 76aa2bd3a7c8ba241880057e672dbf2c, type: 2}
   FloorTiles:
   - {fileID: 1823795302665200, guid: 37081d8084ecf36489ac6f55172f6290, type: 2}
   WallTiles:

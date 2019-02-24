@@ -92,7 +92,10 @@ namespace Assets.Scripts.Rooms
                 if(y == 0)
                     Instantiate(WallTiles[0], renderPosition + new Vector3(-1 * tileSize.x, -1 * tileSize.y), Quaternion.identity);
 
-                if (Math.Abs(y - (Height - 1)) < 0.001)
+                if(Math.Abs(y - (Height - 1)/2) < 0.0001)
+                    Instantiate(DoorTiles[0], renderPosition - new Vector3(1 * tileSize.x, 0), Quaternion.identity);
+
+                if (Math.Abs(y - (Height - 1)) < 0.0001)
                     Instantiate(WallTiles[0], renderPosition + new Vector3(-1 * tileSize.x, 1 * tileSize.y), Quaternion.identity);
             }
 
