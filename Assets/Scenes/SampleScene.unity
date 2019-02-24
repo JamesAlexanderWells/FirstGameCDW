@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 328423163}
   - component: {fileID: 328423165}
   - component: {fileID: 328423166}
+  - component: {fileID: 328423167}
   m_Layer: 0
   m_Name: pickUp3
   m_TagString: Untagged
@@ -232,6 +233,25 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.24
+--- !u!95 &328423167
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328423162}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 040ebe55d74270e4cbdd6aaaa947f5dd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &353589213
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +372,7 @@ GameObject:
   - component: {fileID: 377196595}
   - component: {fileID: 377196597}
   - component: {fileID: 377196598}
+  - component: {fileID: 377196599}
   m_Layer: 0
   m_Name: pickUp2
   m_TagString: Untagged
@@ -460,6 +481,25 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.24
+--- !u!95 &377196599
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377196594}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 37d28a4b02775b3419071a2b0e5a2b6f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &509386768
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,8 +887,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.47186452, y: 0.17742494}
-  m_Size: {x: 1.556271, y: 2.6371303}
+  m_Offset: {x: -0.024044335, y: 0.17742494}
+  m_Size: {x: 0.6606306, y: 2.63713}
   m_Direction: 0
 --- !u!95 &844205863
 Animator:
