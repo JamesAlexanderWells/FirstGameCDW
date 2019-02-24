@@ -80,7 +80,15 @@ namespace Assets.Scripts.Rooms
                         (IsRoomEnd(x - (Width - 1)) && IsRoomEnd(y - (Height - 1) / 2f)) ||
                         (IsRoomEnd(y - (Height - 1)) && IsRoomEnd(x - (Width - 1) / 2f))))
                     {
-                        AddTile(new RandomTileSelector(DoorTiles).GetRandomTile(), ref renderPosition);
+                        var selector = new RandomTileSelector(DoorTiles);
+                        if(selector.GetProbabilisticChoice(0.5f))
+                            AddTile(selector.GetRandomTile(), ref renderPosition);
+
+                        else
+                        {
+                            selector.Tiles = WallTiles;
+                            AddTile(selector.GetRandomTile(), ref renderPosition);
+                        }
                         continue;
                     }
 
@@ -99,7 +107,7 @@ namespace Assets.Scripts.Rooms
 
         private void BuildRandomPrefabs()
         {
-            Random.InitState(DateTime.Now.Millisecond);
+            Random.InitState(Guid.NewGuid().GetHashCode());
             var noOfRandomPrefabs = Random.Range(1, 6);
 
             for (int i = 0; i < noOfRandomPrefabs; i++)

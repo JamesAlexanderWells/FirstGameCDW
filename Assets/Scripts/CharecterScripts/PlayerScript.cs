@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
@@ -19,7 +20,7 @@ public class PlayerScript : MonoBehaviour {
     public List<PickUpScript> pickUpList = new List<PickUpScript>();
     Vector3 startPos;
     public Rigidbody2D rigidbody;
-    private bool playershooting;
+    public GameObject bulletSpriteList;
     // Use this for initialization
     void Start()
     {
@@ -36,9 +37,20 @@ public class PlayerScript : MonoBehaviour {
         anim.SetBool("walkdown", false);
         anim.SetBool("shootdown", false);
         playerMovement();
+        changeBulletApperance();
         playerShooting();
     }
 
+
+    private void changeBulletApperance()
+    {
+        if (pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.fireBall))
+        {
+
+            bullet.GetComponent<BulletScript>().ownSprite.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().fireBallBullet;
+        }
+
+    }
 
 
     private void playerShooting()
@@ -79,7 +91,6 @@ public class PlayerScript : MonoBehaviour {
             GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.identity);
             bullet.transform.position = transform.position;
             bullet.GetComponent<BulletScript>().way = BulletScript.direction.south;
-            Instantiate(bullet);
         }
 
     }
