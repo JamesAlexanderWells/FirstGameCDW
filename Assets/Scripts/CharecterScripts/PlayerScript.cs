@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
 
+    private Animator anim;
     public float speed;
     public float damage;
     private bool wallFreeN = true;
@@ -18,9 +19,11 @@ public class PlayerScript : MonoBehaviour {
     public List<PickUpScript> pickUpList = new List<PickUpScript>();
     Vector3 startPos;
     public Rigidbody2D rigidbody;
+    private bool playershooting;
     // Use this for initialization
     void Start()
     {
+        anim = GetComponent<Animator>();
         startPos = this.transform.position;
         rigidbody.freezeRotation = true;
     }
@@ -28,6 +31,8 @@ public class PlayerScript : MonoBehaviour {
 
     void FixedUpdate()
     {
+        anim.SetBool("ifwalk", false);
+        anim.SetBool("shoot", false);
         playerMovement();
         playerShooting();
     }
@@ -36,16 +41,23 @@ public class PlayerScript : MonoBehaviour {
 
     private void playerShooting()
     {
+        Vector3 theScale = transform.localScale;
         if (Input.GetKey(KeyCode.LeftArrow) && Time.time > nextFire)
         {
-            GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.identity);
+            theScale.x = 1;
+            transform.localScale = theScale;
+            anim.SetBool("shoot", true);
+            GameObject bullet = Instantiate(this.bullet, transform.position - new Vector3(1, 0, 0), Quaternion.identity);
             nextFire = Time.time + fireRate;
-            bullet.transform.position = transform.position;
+            //bullet.transform.position = transform.position;
             bullet.GetComponent<BulletScript>().way = BulletScript.direction.west;
         }
         if (Input.GetKey(KeyCode.RightArrow) && Time.time > nextFire)
         {
-            GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.identity);
+            theScale.x = -1;
+            transform.localScale = theScale;
+            anim.SetBool("shoot", true);
+            GameObject bullet = Instantiate(this.bullet, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
             nextFire = Time.time + fireRate;
             //bullet.transform.position = transform.position;
             bullet.GetComponent<BulletScript>().way = BulletScript.direction.east;
@@ -75,6 +87,7 @@ public class PlayerScript : MonoBehaviour {
 
     private void playerMovement()
     {
+        Vector3 theScale = transform.localScale;
         float y = 0;
         float x = 0;
 
@@ -82,8 +95,13 @@ public class PlayerScript : MonoBehaviour {
         {
             if (wallFreeW)
             {
-
                 x -= speed;
+                if (!Input.GetKey(KeyCode.RightArrow))
+                {
+                    anim.SetBool("ifwalk", true);
+                    theScale.x = 1;
+                    transform.localScale = theScale;
+                }
             }
         }
         if (Input.GetKey(KeyCode.D))
@@ -91,6 +109,12 @@ public class PlayerScript : MonoBehaviour {
             if (wallFreeE)
             {
                 x += speed;
+                if (!Input.GetKey(KeyCode.LeftArrow))
+                {
+                    anim.SetBool("ifwalk", true);
+                    theScale.x = -1;
+                    transform.localScale = theScale;
+                }
             }
         }
         if (Input.GetKey(KeyCode.W))
