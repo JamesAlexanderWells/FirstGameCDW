@@ -1,4 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: e13ad7ede397aac4b8f1992310a29da3
+TextureImporter:
+  fileIDToRecycleName: {}
+  externalObjects: {}
+  serializedVersion: 7
+=======
 guid: b1eb0e310343baa41b9df31447e10fd7
 timeCreated: 1550959112
 licenseType: Free
@@ -6,6 +13,7 @@ TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
   serializedVersion: 4
+>>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -23,6 +31,11 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+<<<<<<< HEAD
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+=======
+>>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -33,7 +46,11 @@ TextureImporter:
     serializedVersion: 2
     filterMode: -1
     aniso: -1
+<<<<<<< HEAD
+    mipBias: -100
+=======
     mipBias: -1
+>>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -45,18 +62,33 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+=======
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+>>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
+<<<<<<< HEAD
+  singleChannelComponent: 0
+=======
+>>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
+<<<<<<< HEAD
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+=======
   - buildTarget: DefaultTexturePlatform
+>>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -71,7 +103,19 @@ TextureImporter:
     sprites: []
     outline: []
     physicsShape: []
+<<<<<<< HEAD
+    bones: []
+    spriteID: 3a5d04effaf5d3643bb3d9afb0c3d85b
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+=======
+  spritePackingTag: 
+>>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -151,6 +151,7 @@
      <Compile Include="Assets\Adic\Scripts\Framework\Util\TypeUtils.cs" />
      <Compile Include="Assets\Scripts\AdicContainer.cs" />
      <Compile Include="Assets\Scripts\BossScripts\Flower.cs" />
+     <Compile Include="Assets\Scripts\BossScripts\Mantis.cs" />
      <Compile Include="Assets\Scripts\BossScripts\Worm.cs" />
      <Compile Include="Assets\Scripts\CharecterScripts\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\ItemScripts\PickUpScript.cs" />
