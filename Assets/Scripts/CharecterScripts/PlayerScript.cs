@@ -33,6 +33,8 @@ public class PlayerScript : MonoBehaviour {
     {
         anim.SetBool("ifwalk", false);
         anim.SetBool("shoot", false);
+        anim.SetBool("walkdown", false);
+        anim.SetBool("shootdown", false);
         playerMovement();
         playerShooting();
     }
@@ -72,6 +74,7 @@ public class PlayerScript : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.DownArrow) && Time.time > nextFire)
         {
+            anim.SetBool("shootdown", true);
             nextFire = Time.time + fireRate;
             GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.identity);
             bullet.transform.position = transform.position;
@@ -96,7 +99,7 @@ public class PlayerScript : MonoBehaviour {
             if (wallFreeW)
             {
                 x -= speed;
-                if (!Input.GetKey(KeyCode.RightArrow))
+                if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow))
                 {
                     anim.SetBool("ifwalk", true);
                     theScale.x = 1;
@@ -109,7 +112,7 @@ public class PlayerScript : MonoBehaviour {
             if (wallFreeE)
             {
                 x += speed;
-                if (!Input.GetKey(KeyCode.LeftArrow))
+                if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow))
                 {
                     anim.SetBool("ifwalk", true);
                     theScale.x = -1;
@@ -128,6 +131,10 @@ public class PlayerScript : MonoBehaviour {
         {
             if (wallFreeS)
             {
+                if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.UpArrow))
+                    {
+                    anim.SetBool("walkdown", true);
+                }
                 y -= speed;
             }
         }
