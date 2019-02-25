@@ -8,7 +8,10 @@ namespace Assets.Scripts.Rooms
     {
         public GameObject CurrentRoom;
 
-        // Use this for initialization
+        public void OnEnable() { Door.OnEnterDoor += DoorEntered; }
+
+        public void OnDisable() { Door.OnEnterDoor -= DoorEntered; }
+
         void Start()
         {
             CurrentRoom = Instantiate(CurrentRoom);
@@ -24,10 +27,9 @@ namespace Assets.Scripts.Rooms
             baseRoom.Height = (roomHeight % 2) != 0 ? roomHeight : roomHeight - 1;
         }
 
-        // Update is called once per frame
-        void Update()
+        private void DoorEntered()
         {
-
+            Debug.Log("Door Hit!");
         }
     }
 }

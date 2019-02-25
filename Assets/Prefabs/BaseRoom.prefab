@@ -40,14 +40,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc723a2d5ecf9a94a962caead4b635e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoorTiles:
-  - {fileID: 1655151654254436, guid: 76aa2bd3a7c8ba241880057e672dbf2c, type: 2}
-  FloorTiles:
-  - {fileID: 1823795302665200, guid: 37081d8084ecf36489ac6f55172f6290, type: 2}
-  - {fileID: 4095805248697543753, guid: 2ddf43dee83553e45990425352d4856a, type: 2}
-  WallTiles:
-  - {fileID: 1783457662588924, guid: b7bc1391031cdaf43bb6a684bce543de, type: 2}
-  PrefabObjects:
-  - {fileID: 1467885724965604, guid: 4ba10232f4bb83244b501e2f3599d42e, type: 2}
+  Assets: {fileID: 114761756751153708, guid: 244131ac75b8a6d42b2cd6a3ad2c7bc9, type: 2}
   Player: {fileID: 0}
   ExitDoor: 0
