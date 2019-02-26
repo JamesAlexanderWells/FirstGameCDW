@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PickUpScript : MonoBehaviour
 {
+
+    
     public enum nameType
     {
         fireBall,
         bear,
         kawabunga,
+        dimensionPhase,
+        squashBall
     };
 
     public int healthIncrease;
