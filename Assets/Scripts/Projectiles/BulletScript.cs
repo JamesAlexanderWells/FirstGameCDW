@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour {
     public float speed;
-    public List<PickUpScript> pickUpList = new List<PickUpScript>();
+    public GameObject player;
+    public GameObject bulletSpriteList;
     int reversal = 1;
     private float initializationTime;
     public enum direction
@@ -20,65 +21,87 @@ public class BulletScript : MonoBehaviour {
 
 
     public SpriteRenderer ownSprite;
-    // Use this for initialization
+
     void Start()
     {
         initializationTime = Time.timeSinceLevelLoad;
+        changeBulletApperance();
     }
 
-    // Update is called once per frame
+    private void changeBulletApperance()
+    {
+        if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.fireBall))
+        {
+            this.ownSprite.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().fireBallBullet;
+        }
+        else if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.boomerang)) {
+            this.ownSprite.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().boomerangBullet;
+        }
+        else if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.dimensionPhase)) {
+            this.ownSprite.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().spectralBullet;
+        }
+        else if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.squashBall))
+        {
+            this.ownSprite.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().bouncyBullet;
+        }
+
+
+
+
+    }
+
+
     void FixedUpdate()
     {
         movement();
-        returnBullet();
         timeOut();
     }
 
     void timeOut() {
-        if ( 3 <= Time.timeSinceLevelLoad - initializationTime) {
+        if ( 3 <= Time.timeSinceLevelLoad - initializationTime && this.name.Contains("Clone")) {
             Destroy(this.gameObject);
-        }
-    }
-
-    void returnBullet()
-    {
-        if (1.5 <= Time.timeSinceLevelLoad - initializationTime)
-        {
-            reversal = -1;
         }
     }
 
     void movement()
     {
-        switch (way)
+
+        if (1.5 <= Time.timeSinceLevelLoad - initializationTime && player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.boomerang) && this.name.Contains("Clone"))
         {
-            case direction.north:
-                this.transform.position += (Vector3.up * speed * Time.deltaTime) * reversal;
-                break;
-            case direction.south:
-                transform.position += (Vector3.down * speed * Time.deltaTime) * reversal;
-                break;
-            case direction.east:
-                this.transform.position += (Vector3.right * speed * Time.deltaTime) * reversal;
-                break;
-            case direction.west:
-                this.transform.position += (Vector3.left * speed * Time.deltaTime) * reversal;
-                break;
-            default:
-                break;
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        }
+        else
+        {
+            switch (way)
+            {
+                case direction.north:
+                    this.transform.position += (Vector3.up * speed * Time.deltaTime) * reversal;
+                    break;
+                case direction.south:
+                    transform.position += (Vector3.down * speed * Time.deltaTime) * reversal;
+                    break;
+                case direction.east:
+                    this.transform.position += (Vector3.right * speed * Time.deltaTime) * reversal;
+                    break;
+                case direction.west:
+                    this.transform.position += (Vector3.left * speed * Time.deltaTime) * reversal;
+                    break;
+                default:
+                    break;
+            }
         }
 
     }
 
     void OnTriggerEnter2D(Collider2D thing)
     {
-        if (thing.name.Contains("Wall"))
+        if (thing.name.Contains("Wall") || thing.name.Contains("Rock"))
         {
-            if (pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.squashBall))
+            if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.squashBall))
             {
                 reversal *= -1;
             }
-            else if (pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.dimensionPhase)) {
+            else if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.dimensionPhase)) {
 
             }
             else
@@ -86,7 +109,7 @@ public class BulletScript : MonoBehaviour {
                 Destroy(this.gameObject);
             }
         }
-        if (thing.name.Contains("player") && reversal == -1 && ) {
+        if (thing.name.Contains("player") && reversal == -1 && player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.boomerang)) {
             Destroy(this.gameObject);
         }
 

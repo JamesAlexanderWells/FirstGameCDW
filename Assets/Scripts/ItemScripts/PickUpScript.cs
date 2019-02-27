@@ -12,7 +12,8 @@ public class PickUpScript : MonoBehaviour
         bear,
         kawabunga,
         dimensionPhase,
-        squashBall
+        squashBall,
+        boomerang
     };
 
     public int healthIncrease;
@@ -34,11 +35,6 @@ public class PickUpScript : MonoBehaviour
         Array values = Enum.GetValues(typeof(nameType));
         System.Random random = new System.Random();
         pickUpName = (nameType)values.GetValue(random.Next(values.Length));
-
-
-
-
-
         while (otherPowerUp1.GetComponent<PickUpScript>().pickUpName == this.pickUpName || otherPowerUp2.GetComponent<PickUpScript>().pickUpName == this.pickUpName)
         {
             pickUpName = (nameType)values.GetValue(random.Next(values.Length));
@@ -59,6 +55,15 @@ public class PickUpScript : MonoBehaviour
                 break;
             case nameType.kawabunga:
                 ownSprite.sprite = spriteList.GetComponent<PickUpSpriteList>().kawabunga;
+                break;
+            case nameType.dimensionPhase:
+                ownSprite.sprite = spriteList.GetComponent<PickUpSpriteList>().dimensionPhase;
+                break;
+            case nameType.boomerang:
+                ownSprite.sprite = spriteList.GetComponent<PickUpSpriteList>().boomerang;
+                break;
+            case nameType.squashBall:
+                ownSprite.sprite = spriteList.GetComponent<PickUpSpriteList>().squashBall;
                 break;
         }
 

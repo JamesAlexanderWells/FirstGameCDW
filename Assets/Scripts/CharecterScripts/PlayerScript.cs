@@ -19,7 +19,7 @@ public class PlayerScript : MonoBehaviour {
     public List<PickUpScript> pickUpList = new List<PickUpScript>();
     Vector3 startPos;
     public Rigidbody2D rigidbody;
-    public GameObject bulletSpriteList;
+    
     // Use this for initialization
     void Start()
     {
@@ -36,20 +36,11 @@ public class PlayerScript : MonoBehaviour {
         anim.SetBool("walkdown", false);
         anim.SetBool("shootdown", false);
         playerMovement();
-        changeBulletApperance();
         playerShooting();
     }
 
 
-    private void changeBulletApperance()
-    {
-        if (pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.fireBall))
-        {
-
-            bullet.GetComponent<BulletScript>().ownSprite.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().fireBallBullet;
-        }
-
-    }
+    
 
 
     private void playerShooting()
