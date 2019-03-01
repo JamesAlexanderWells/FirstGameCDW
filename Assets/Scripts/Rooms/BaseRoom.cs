@@ -50,7 +50,8 @@ namespace Assets.Scripts.Rooms
 
         private void BuildRoom(Vector3 renderPosition, Vector3 initialPosition)
         {
-            var builder = new RoomBuilder(Width, Height, TileSize, initialPosition, renderPosition, Assets);
+            var builder = new RoomBuilder(Width, Height, TileSize, initialPosition,
+                renderPosition, Assets, this.name);
             builder.Build();
         }
     }

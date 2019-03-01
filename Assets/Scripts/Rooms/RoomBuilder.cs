@@ -22,7 +22,11 @@ namespace Assets.Scripts.Rooms
 
         private RoomAssetSet assets;
 
-        public RoomBuilder(float widthBound, float heightBound, Vector3 tileSize, Vector3 initialPosition, Vector3 renderPosition, RoomAssetSet assets)
+        private GameObject parentRoom;
+
+        public RoomBuilder(float widthBound, float heightBound, Vector3 tileSize,
+            Vector3 initialPosition, Vector3 renderPosition, RoomAssetSet assets,
+            string roomName)
         {
             this.widthBound = widthBound;
             this.heightBound = heightBound;
@@ -30,6 +34,7 @@ namespace Assets.Scripts.Rooms
             this.initialPosition = initialPosition;
             this.renderPosition = renderPosition;
             this.assets = assets;
+            this.parentRoom = GameObject.Find(roomName);
         }
 
         public void Build()
@@ -73,7 +78,9 @@ namespace Assets.Scripts.Rooms
             for (int i = 0; i < noOfRandomPrefabs; i++)
             {
                 var selector = new RandomTileSelector(assets.PrefabTiles);
-                Object.Instantiate(selector.GetRandomTile(), selector.GetRandomVectorInSpace(GameObject.FindGameObjectsWithTag("Floor")), Quaternion.identity);
+                var newPrefab = Object.Instantiate(selector.GetRandomTile(),
+                    selector.GetRandomVectorInSpace(GameObject.FindGameObjectsWithTag("Floor")), Quaternion.identity);
+                newPrefab.transform.parent = parentRoom.transform;
             }
         }
 
@@ -93,7 +100,8 @@ namespace Assets.Scripts.Rooms
 
         private void AddRoomTile(GameObject tile, ref Vector3 renderPosition)
         {
-            Object.Instantiate(tile, renderPosition, Quaternion.identity);
+            var newTile = Object.Instantiate(tile, renderPosition, Quaternion.identity);
+            newTile.transform.parent = parentRoom.transform;
             renderPosition += new Vector3(0, tileSize.y);
         }
     }

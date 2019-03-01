@@ -6,7 +6,9 @@ namespace Assets.Scripts.Rooms
 {
     public class RoomController : MonoBehaviour
     {
-        public GameObject CurrentRoom;
+        public GameObject CurrentRoomGameObject;
+
+        public BaseRoom CurrentRoom { get; set; }
 
         public void OnEnable() { Door.OnEnterDoor += DoorEntered; }
 
@@ -14,22 +16,36 @@ namespace Assets.Scripts.Rooms
 
         void Start()
         {
-            CurrentRoom = Instantiate(CurrentRoom);
-            var baseRoom = CurrentRoom.GetComponent<BaseRoom>();
+            CurrentRoomGameObject = Instantiate(CurrentRoomGameObject);
+            CurrentRoom = CurrentRoomGameObject.GetComponent<BaseRoom>();
+            InitialiseRoom();
+        }
 
-            baseRoom.Player = GameObject.Find("dummyPlayer");
+        private void InitialiseRoom()
+        {
+            CurrentRoom.Player = GameObject.Find("dummyPlayer");
 
             Random.InitState(Guid.NewGuid().GetHashCode());
             var roomWidth = Random.Range(10, 40);
             var roomHeight = Random.Range(10, 40);
 
-            baseRoom.Width = (roomWidth % 2) != 0 ? roomWidth : roomWidth - 1;
-            baseRoom.Height = (roomHeight % 2) != 0 ? roomHeight : roomHeight - 1;
+            CurrentRoom.Width = (roomWidth % 2) != 0 ? roomWidth : roomWidth - 1;
+            CurrentRoom.Height = (roomHeight % 2) != 0 ? roomHeight : roomHeight - 1;
         }
 
         private void DoorEntered()
         {
-            Debug.Log("Door Hit!");
+            var currentRoom = CurrentRoomGameObject.GetComponent<BaseRoom>();
+            Destroy(CurrentRoomGameObject);
+
+            var normalRoomPrefab = GameObject.FindGameObjectWithTag("NormalRoom");
+            var normalComponent = normalRoomPrefab.AddComponent<NormalRoom>();
+
+            CurrentRoom = normalComponent;
+            InitialiseRoom();
+
+            CurrentRoom.Assets = currentRoom.Assets;
+            CurrentRoom.ExitDoor = currentRoom.ExitDoor;
         }
     }
 }
