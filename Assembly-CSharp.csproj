@@ -51,30 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Adic\Examples\01_HelloWorld\Scripts\GameRoot.cs" />
-     <Compile Include="Assets\Adic\Examples\01_HelloWorld\Scripts\HelloWorld.cs" />
-     <Compile Include="Assets\Adic\Examples\02_BindingGameObjects\Scripts\GameObjectRotator.cs" />
-     <Compile Include="Assets\Adic\Examples\02_BindingGameObjects\Scripts\GameRoot.cs" />
-     <Compile Include="Assets\Adic\Examples\03_UsingConditions\Scripts\GameObjectRotator.cs" />
-     <Compile Include="Assets\Adic\Examples\03_UsingConditions\Scripts\GameRoot.cs" />
-     <Compile Include="Assets\Adic\Examples\04_Prefabs\Scripts\CubeRotator.cs" />
-     <Compile Include="Assets\Adic\Examples\04_Prefabs\Scripts\GameRoot.cs" />
-     <Compile Include="Assets\Adic\Examples\05_Commander\Scripts\Commands\RotateGameObjectCommand.cs" />
-     <Compile Include="Assets\Adic\Examples\05_Commander\Scripts\Commands\SpawnGameObjectCommand.cs" />
-     <Compile Include="Assets\Adic\Examples\05_Commander\Scripts\GameRoot.cs" />
-     <Compile Include="Assets\Adic\Examples\06_BindingsSetup\Scripts\Behaviours\CubeRotator.cs" />
-     <Compile Include="Assets\Adic\Examples\06_BindingsSetup\Scripts\Bindings\DataBindings.cs" />
-     <Compile Include="Assets\Adic\Examples\06_BindingsSetup\Scripts\Bindings\PrefabBindings.cs" />
-     <Compile Include="Assets\Adic\Examples\06_BindingsSetup\Scripts\Data\CubeRotationSpeed.cs" />
-     <Compile Include="Assets\Adic\Examples\06_BindingsSetup\Scripts\GameRoot.cs" />
-     <Compile Include="Assets\Adic\Examples\07_Factory\Scripts\Behaviours\Cube.cs" />
-     <Compile Include="Assets\Adic\Examples\07_Factory\Scripts\Behaviours\Rotator.cs" />
-     <Compile Include="Assets\Adic\Examples\07_Factory\Scripts\Bindings\FactoryBindings.cs" />
-     <Compile Include="Assets\Adic\Examples\07_Factory\Scripts\Commands\SpawnObjectsCommand.cs" />
-     <Compile Include="Assets\Adic\Examples\07_Factory\Scripts\Factories\CubeFactory.cs" />
-     <Compile Include="Assets\Adic\Examples\07_Factory\Scripts\GameRoot.cs" />
-     <Compile Include="Assets\Adic\Examples\08_UnityEvents\Scripts\EventReceiver.cs" />
-     <Compile Include="Assets\Adic\Examples\08_UnityEvents\Scripts\GameRoot.cs" />
      <Compile Include="Assets\Adic\Scripts\Extensions\BindingsSetup\BindingPriority.cs" />
      <Compile Include="Assets\Adic\Scripts\Extensions\BindingsSetup\BindingsSetupExtension.cs" />
      <Compile Include="Assets\Adic\Scripts\Extensions\BindingsSetup\IBindingsSetup.cs" />

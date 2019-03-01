@@ -811,7 +811,7 @@ MonoBehaviour:
   currentHealth: 0
   fireRate: 0.25
   pickUpList: []
-  rigidbody: {fileID: 844205861}
+  playerRigidbody2D: {fileID: 844205861}
 --- !u!50 &844205861
 Rigidbody2D:
   serializedVersion: 4

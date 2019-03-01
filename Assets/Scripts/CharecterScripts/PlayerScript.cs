@@ -18,14 +18,14 @@ public class PlayerScript : MonoBehaviour {
     private float nextFire;
     public List<PickUpScript> pickUpList = new List<PickUpScript>();
     Vector3 startPos;
-    public Rigidbody2D rigidbody;
+    public Rigidbody2D playerRigidbody2D;
     
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
         startPos = this.transform.position;
-        rigidbody.freezeRotation = true;
+        playerRigidbody2D.freezeRotation = true;
     }
 
 
@@ -139,7 +139,7 @@ public class PlayerScript : MonoBehaviour {
                 y -= speed;
             }
         }
-        rigidbody.velocity = new Vector3(x, y, 0);
+        playerRigidbody2D.velocity = new Vector3(x, y, 0);
     }
 
 }
