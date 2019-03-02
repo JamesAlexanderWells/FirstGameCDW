@@ -36,16 +36,28 @@ namespace Assets.Scripts.Rooms
         private void DoorEntered()
         {
             var currentRoom = CurrentRoomGameObject.GetComponent<BaseRoom>();
-            Destroy(CurrentRoomGameObject);
 
-            var normalRoomPrefab = GameObject.FindGameObjectWithTag("NormalRoom");
-            var normalComponent = normalRoomPrefab.AddComponent<NormalRoom>();
+            if(typeof(BaseRoom) == currentRoom.GetType())
+                Destroy(CurrentRoomGameObject);
 
+            CurrentRoomGameObject = GameObject.FindGameObjectWithTag("NormalRoom");
+            DestroyPreviousRoom();
+
+            var normalComponent = CurrentRoomGameObject.AddComponent<NormalRoom>();
             CurrentRoom = normalComponent;
             InitialiseRoom();
 
             CurrentRoom.Assets = currentRoom.Assets;
             CurrentRoom.ExitDoor = currentRoom.ExitDoor;
+        }
+
+        private void DestroyPreviousRoom()
+        {
+            foreach (Transform child in CurrentRoomGameObject.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            Destroy(CurrentRoomGameObject.GetComponent<NormalRoom>());
         }
     }
 }

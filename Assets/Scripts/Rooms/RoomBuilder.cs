@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Assets.Scripts.Enumerations;
 using Assets.Scripts.Rooms.Models;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -45,15 +47,7 @@ namespace Assets.Scripts.Rooms
                 {
                     if (DetectDoorCases(x, y))
                     {
-                        var selector = new RandomTileSelector(assets.DoorTiles);
-                        if (selector.GetProbabilisticChoice(0.5f))
-                            AddRoomTile(selector.GetRandomTile(), ref renderPosition);
-
-                        else
-                        {
-                            selector.Tiles = assets.WallTiles;
-                            AddRoomTile(selector.GetRandomTile(), ref renderPosition);
-                        }
+                        AddDoorTiles();
                         continue;
                     }
 
@@ -67,10 +61,23 @@ namespace Assets.Scripts.Rooms
                 renderPosition.x += tileSize.x;
                 renderPosition.y = initialPosition.y;
             }
-            BuildRandomPrefabs();
+            AddRandomPrefabs();
         }
 
-        private void BuildRandomPrefabs()
+        private void AddDoorTiles()
+        {
+            var selector = new RandomTileSelector(assets.DoorTiles);
+            if (selector.GetProbabilisticChoice(0.5f))
+                AddRoomTile(selector.GetRandomTile(), ref renderPosition);
+
+            else
+            {
+                selector.Tiles = assets.WallTiles;
+                AddRoomTile(selector.GetRandomTile(), ref renderPosition);
+            }
+        }
+
+        private void AddRandomPrefabs()
         {
             Random.InitState(Guid.NewGuid().GetHashCode());
             var noOfRandomPrefabs = Random.Range(1, 6);
@@ -84,25 +91,25 @@ namespace Assets.Scripts.Rooms
             }
         }
 
-        private bool DetectDoorCases(int x, int y)
-        {
-            return
-                x == 0 && IsRoomEnd(y - (heightBound - 1) / 2f) ||
-                y == 0 && IsRoomEnd(x - (widthBound - 1) / 2f) ||
-                IsRoomEnd(x - (widthBound - 1)) && IsRoomEnd(y - (heightBound - 1) / 2f) ||
-                IsRoomEnd(y - (heightBound - 1)) && IsRoomEnd(x - (widthBound - 1) / 2f);
-        }
-
-        private bool IsRoomEnd(float expression)
-        {
-            return Math.Abs(expression) < Tolerance;
-        }
-
         private void AddRoomTile(GameObject tile, ref Vector3 renderPosition)
         {
             var newTile = Object.Instantiate(tile, renderPosition, Quaternion.identity);
             newTile.transform.parent = parentRoom.transform;
             renderPosition += new Vector3(0, tileSize.y);
+        }
+
+        private bool DetectDoorCases(int x, int y)
+        {
+            var leftDoor = x == 0 && IsRoomEnd(y - (heightBound - 1) / 2f);
+            var bottomDoor = y == 0 && IsRoomEnd(x - (widthBound - 1) / 2f);
+            var rightDoor = IsRoomEnd(x - (widthBound - 1)) && IsRoomEnd(y - (heightBound - 1) / 2f);
+            var topDoor = IsRoomEnd(y - (heightBound - 1)) && IsRoomEnd(x - (widthBound - 1) / 2f);
+            return leftDoor || bottomDoor || rightDoor || topDoor;
+        }
+
+        private bool IsRoomEnd(float expression)
+        {
+            return Math.Abs(expression) < Tolerance;
         }
     }
 }
