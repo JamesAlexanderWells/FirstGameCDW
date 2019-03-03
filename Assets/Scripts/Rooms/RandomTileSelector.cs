@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 using UnityRandom = UnityEngine.Random;
@@ -34,12 +33,28 @@ namespace Assets.Scripts.Rooms
         public Vector3 GetRandomVectorInSpace(GameObject[] tileSpace)
         {
             UnityRandom.InitState(Guid.NewGuid().GetHashCode());
-            var minXPosition = tileSpace.Min(x => x.transform.position.x);
-            var maxXPosition = tileSpace.Max(x => x.transform.position.x);
 
-            var minYPosition = tileSpace.Min(x => x.transform.position.y);
-            var maxYPosition = tileSpace.Max(x => x.transform.position.y);
+            // We're going to get a little more perf running a for loop over
+            // using LINQ here.
+            float minXPosition = float.MaxValue, minYPosition = float.MaxValue, 
+                maxXPosition = float.MinValue, maxYPosition = float.MinValue;
 
+            foreach (var tile in tileSpace)
+            {
+                var tilePosition = tile.transform.position;
+
+                if (tilePosition.x < minXPosition)
+                    minXPosition = tilePosition.x;
+
+                if (tilePosition.y < minYPosition)
+                    minYPosition = tilePosition.y;
+
+                if (tilePosition.x > maxXPosition)
+                    maxXPosition = tilePosition.x;
+
+                if (tilePosition.y > maxYPosition)
+                    maxYPosition = tilePosition.y;
+            }
             var xCoordinate = UnityRandom.Range(minXPosition, maxXPosition);
             var yCoordinate = UnityRandom.Range(minYPosition, maxYPosition);
             return new Vector3(xCoordinate, yCoordinate);

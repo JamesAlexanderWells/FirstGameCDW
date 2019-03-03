@@ -1,5 +1,4 @@
 using UnityEngine;
-using Adic;
 using Adic.Extensions.MonoInjection;
 
 /// <summary>

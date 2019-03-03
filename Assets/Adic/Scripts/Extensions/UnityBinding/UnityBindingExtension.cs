@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Collections;
 using Adic.Binding;
 using Adic.Exceptions;
 using Adic.Util;

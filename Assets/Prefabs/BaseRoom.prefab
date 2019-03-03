@@ -3,10 +3,9 @@
 --- !u!1 &1805568813778854
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
   m_Component:
   - component: {fileID: 4984771550108218}
   - component: {fileID: 114958724332774298}
@@ -20,9 +19,8 @@ GameObject:
 --- !u!4 &4984771550108218
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1805568813778854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.71279, y: -1.8384031, z: -0.08560594}
@@ -34,23 +32,14 @@ Transform:
 --- !u!114 &114958724332774298
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1805568813778854}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc723a2d5ecf9a94a962caead4b635e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoorTiles:
-  - {fileID: 1655151654254436, guid: 76aa2bd3a7c8ba241880057e672dbf2c, type: 3}
-  FloorTiles:
-  - {fileID: 1823795302665200, guid: 37081d8084ecf36489ac6f55172f6290, type: 3}
-  - {fileID: 4095805248697543753, guid: 2ddf43dee83553e45990425352d4856a, type: 3}
-  WallTiles:
-  - {fileID: 1783457662588924, guid: b7bc1391031cdaf43bb6a684bce543de, type: 3}
-  PrefabObjects:
-  - {fileID: 1467885724965604, guid: 4ba10232f4bb83244b501e2f3599d42e, type: 3}
+  Assets: {fileID: 114761756751153708, guid: 244131ac75b8a6d42b2cd6a3ad2c7bc9, type: 2}
   Player: {fileID: 0}
   ExitDoor: 0

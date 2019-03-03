@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace Adic {
+﻿namespace Adic {
     /// <summary>
     /// Defines how instance resolution is done.
     /// </summary>

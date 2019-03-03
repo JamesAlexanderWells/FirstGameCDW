@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 
 namespace Adic.Cache {
     /// <summary>

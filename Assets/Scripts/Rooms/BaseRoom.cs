@@ -1,25 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets.Scripts.Enumerations;
+﻿using Assets.Scripts.Enumerations;
+using Assets.Scripts.Rooms.Models;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Rooms
 {
     public class BaseRoom : MonoBehaviour
     {
-        public const float Tolerance = 0.0001f;
-
-
-        public List<GameObject> DoorTiles;
-
-        public List<GameObject> FloorTiles;
-
-        public List<GameObject> WallTiles;
-
-        public List<GameObject> PrefabObjects;
+        public RoomAssetSet Assets;
 
         public GameObject Player;
 
@@ -31,14 +18,6 @@ namespace Assets.Scripts.Rooms
         public float Height { get; set; }
 
         public Vector3 TileSize { get; set; }
-
-        public BaseRoom()
-        {
-            DoorTiles = new List<GameObject>();
-            FloorTiles = new List<GameObject>();
-            WallTiles = new List<GameObject>();
-            PrefabObjects = new List<GameObject>();
-        }
 
         void Start()
         {
@@ -64,68 +43,16 @@ namespace Assets.Scripts.Rooms
 
         public Vector3 GetFloorTileSize()
         {
-            var tileRenderer = FloorTiles[0].GetComponent<Renderer>();
+            var tileRenderer = Assets.FloorTiles[0].GetComponent<Renderer>();
             var tileSize = tileRenderer.bounds.size;
             return tileSize;
         }
 
         private void BuildRoom(Vector3 renderPosition, Vector3 initialPosition)
         {
-            for (int x = 0; x < Width; x++)
-            {
-                for (int y = 0; y < Height; y++)
-                {
-                    if ((x == 0 && IsRoomEnd(y - (Height - 1) / 2f) ||
-                        (y == 0 && IsRoomEnd(x - (Width - 1) / 2f)) ||
-                        (IsRoomEnd(x - (Width - 1)) && IsRoomEnd(y - (Height - 1) / 2f)) ||
-                        (IsRoomEnd(y - (Height - 1)) && IsRoomEnd(x - (Width - 1) / 2f))))
-                    {
-                        var selector = new RandomTileSelector(DoorTiles);
-                        if(selector.GetProbabilisticChoice(0.5f))
-                            AddTile(selector.GetRandomTile(), ref renderPosition);
-
-                        else
-                        {
-                            selector.Tiles = WallTiles;
-                            AddTile(selector.GetRandomTile(), ref renderPosition);
-                        }
-                        continue;
-                    }
-
-                    if (x == 0 || y == 0 || IsRoomEnd(x - (Width - 1)) || IsRoomEnd(y - (Height - 1)))
-                    {
-                        AddTile(new RandomTileSelector(WallTiles).GetRandomTile(), ref renderPosition);
-                        continue;
-                    }
-                    AddTile(new RandomTileSelector(FloorTiles).GetRandomTile(), ref renderPosition);
-                }
-                renderPosition.x += TileSize.x;
-                renderPosition.y = initialPosition.y;
-            }
-            BuildRandomPrefabs();
-        }
-
-        private void BuildRandomPrefabs()
-        {
-            Random.InitState(Guid.NewGuid().GetHashCode());
-            var noOfRandomPrefabs = Random.Range(1, 6);
-
-            for (int i = 0; i < noOfRandomPrefabs; i++)
-            {
-                var selector = new RandomTileSelector(PrefabObjects);
-                Instantiate(selector.GetRandomTile(), selector.GetRandomVectorInSpace(GameObject.FindGameObjectsWithTag("Floor")), Quaternion.identity);
-            }
-        }
-
-        private bool IsRoomEnd(float expression)
-        {
-            return Math.Abs(expression) < Tolerance;
-        }
-
-        private void AddTile(GameObject tile, ref Vector3 renderPosition)
-        {
-            Instantiate(tile, renderPosition, Quaternion.identity);
-            renderPosition += new Vector3(0, TileSize.y);
+            var builder = new RoomBuilder(Width, Height, TileSize, initialPosition,
+                renderPosition, Assets, this.name);
+            builder.Build();
         }
     }
 }
