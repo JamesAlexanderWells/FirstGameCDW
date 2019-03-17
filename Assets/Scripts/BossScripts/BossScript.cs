@@ -11,6 +11,11 @@ public class BossScript : MonoBehaviour
     public float Size;
     public GameObject Target;
     public GameObject player;
+    public bool Knockback;
+    private float KnockbackTimer;
+    public float KnockbackSpeed;
+    public bool Split;
+
     
     // Start is called before the first frame update
     void Start()
@@ -48,6 +53,10 @@ public class BossScript : MonoBehaviour
         if (col.name.Contains("Bullet") && col.name.Contains("Clone"))
         {
             Health -= player.GetComponent<PlayerScript>().damage;
+            Knockback = true;
+            KnockbackTimer = Time.time;
+            GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
+            Split = true;
         }
     }
     public void DealDamage(Collider2D col)
@@ -65,8 +74,12 @@ public class BossScript : MonoBehaviour
         }
 
     }
-    public void KnockBack()
+    public void KnockbackCooldown()
     {
-
+        if (Knockback && (Time.time - KnockbackTimer > 0.1f))
+        {
+            GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
+            Knockback = false;
+        }
     }
 }
