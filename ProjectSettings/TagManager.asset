@@ -8,6 +8,7 @@ TagManager:
   - Scenery
   - Floor
   - NormalRoom
+  - Boss
   layers:
   - Default
   - TransparentFX
