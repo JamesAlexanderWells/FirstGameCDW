@@ -1,18 +1,9 @@
 fileFormatVersion: 2
 guid: 6669bb3a731a6204da1c693238e5e68f
-<<<<<<< HEAD
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
   serializedVersion: 7
-=======
-timeCreated: 1550951855
-licenseType: Free
-TextureImporter:
-  fileIDToRecycleName: {}
-  externalObjects: {}
-  serializedVersion: 4
->>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -30,11 +21,8 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
-<<<<<<< HEAD
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
-=======
->>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -57,33 +45,21 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
-=======
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
->>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
-<<<<<<< HEAD
   singleChannelComponent: 0
-=======
->>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-<<<<<<< HEAD
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-=======
-  - buildTarget: DefaultTexturePlatform
->>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -98,9 +74,8 @@ TextureImporter:
     sprites: []
     outline: []
     physicsShape: []
-<<<<<<< HEAD
     bones: []
-    spriteID: 9f504d748b7f6df44b0c6350a3f4960c
+    spriteID: 52b73ed7b0ab8bf4bb9e7354d6633d7a
     vertices: []
     indices: 
     edges: []
@@ -108,9 +83,6 @@ TextureImporter:
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
-=======
-  spritePackingTag: 
->>>>>>> dfd373bfa84c772003c8f68b962cb5226df8d6ba
   userData: 
   assetBundleName: 
   assetBundleVariant: 
