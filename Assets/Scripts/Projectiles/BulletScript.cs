@@ -2,12 +2,15 @@
 using System.Linq;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour {
+public class BulletScript : MonoBehaviour
+{
     public float speed;
     public GameObject player;
     public GameObject bulletSpriteList;
     int reversal = 1;
     private float initializationTime;
+    CircleCollider2D cC2D;
+    SpriteRenderer sRend;
     public enum direction
     {
         north,
@@ -24,25 +27,53 @@ public class BulletScript : MonoBehaviour {
 
     void Start()
     {
-        initializationTime = Time.timeSinceLevelLoad;
-        changeBulletApperance();
+        if (this.name.Contains("Clone"))
+        {
+            initializationTime = Time.timeSinceLevelLoad;
+            addComponents();
+            changeBulletApperance();
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (this.name.Contains("Clone"))
+        {
+            movement();
+            timeOut();
+        }
+    }
+
+
+    private void addComponents()
+    {
+        cC2D = gameObject.AddComponent(typeof(CircleCollider2D)) as CircleCollider2D;
+        sRend = gameObject.AddComponent(typeof(SpriteRenderer)) as SpriteRenderer;
+
+        cC2D.isTrigger = true;
+        cC2D.radius = 1.436925f;
+
+        sRend.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().baisicBullet;
+        sRend.sortingOrder = 2;
     }
 
     private void changeBulletApperance()
     {
         if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.fireBall))
         {
-            this.ownSprite.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().fireBallBullet;
+            sRend.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().fireBallBullet;
         }
-        else if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.boomerang)) {
-            this.ownSprite.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().boomerangBullet;
+        else if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.boomerang))
+        {
+            sRend.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().boomerangBullet;
         }
-        else if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.dimensionPhase)) {
-            this.ownSprite.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().spectralBullet;
+        else if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.dimensionPhase))
+        {
+            sRend.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().spectralBullet;
         }
         else if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.squashBall))
         {
-            this.ownSprite.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().bouncyBullet;
+            sRend.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().bouncyBullet;
         }
 
 
@@ -51,14 +82,12 @@ public class BulletScript : MonoBehaviour {
     }
 
 
-    void FixedUpdate()
-    {
-        movement();
-        timeOut();
-    }
 
-    void timeOut() {
-        if ( 3 <= Time.timeSinceLevelLoad - initializationTime && this.name.Contains("Clone")) {
+
+    void timeOut()
+    {
+        if (3 <= Time.timeSinceLevelLoad - initializationTime)
+        {
             Destroy(this.gameObject);
         }
     }
@@ -66,7 +95,7 @@ public class BulletScript : MonoBehaviour {
     void movement()
     {
 
-        if (1.5 <= Time.timeSinceLevelLoad - initializationTime && player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.boomerang) && this.name.Contains("Clone"))
+        if (1.5 <= Time.timeSinceLevelLoad - initializationTime && player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.boomerang))
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
@@ -95,13 +124,14 @@ public class BulletScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D thing)
     {
-        if (thing.name.Contains("Wall") || thing.name.Contains("Rock"))
+        if (thing.name.Contains("Wall") || thing.name.Contains("Rock") || thing.tag == "Boss")
         {
             if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.squashBall))
             {
                 reversal *= -1;
             }
-            else if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.dimensionPhase)) {
+            else if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.dimensionPhase))
+            {
 
             }
             else
@@ -109,7 +139,8 @@ public class BulletScript : MonoBehaviour {
                 Destroy(this.gameObject);
             }
         }
-        if (thing.name.Contains("player") && reversal == -1 && player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.boomerang)) {
+        if (thing.name.Contains("player") && reversal == -1 && player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.boomerang))
+        {
             Destroy(this.gameObject);
         }
 

@@ -2,7 +2,6 @@
 
 public class PickUpSpriteList : MonoBehaviour
 {
-
     public Sprite fireBall;
     public Sprite bear;
     public Sprite kawabunga;
