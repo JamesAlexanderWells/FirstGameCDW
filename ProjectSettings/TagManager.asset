@@ -20,9 +20,9 @@ TagManager:
   - 
   - Enemy
   - Scenery
-  - 
-  - 
-  - 
+  - LandBoss
+  - FlyingBoss
+  - Player
   - 
   - 
   - 
