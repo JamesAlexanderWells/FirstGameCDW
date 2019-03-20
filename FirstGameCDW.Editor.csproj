@@ -301,13 +301,6 @@
   <ItemGroup>
     <None Include="Assets\Adic\CHANGELOG.txt" />
     <None Include="Assets\Adic\LICENSE.txt" />
-    <None Include="Assets\TileMap\Tilesets\crawl-tiles Oct-5-2010\crawl-tiles Oct-5-2010\LICENSE.txt" />
-    <None Include="Assets\TileMap\Tilesets\crawl-tiles Oct-5-2010\crawl-tiles Oct-5-2010\README.txt" />
-    <None Include="Assets\TileMap\Tilesets\crawl-tiles Oct-5-2010\crawl-tiles Oct-5-2010\dc-mon\animals\animals.txt" />
-    <None Include="Assets\TileMap\Tilesets\crawl-tiles Oct-5-2010\crawl-tiles Oct-5-2010\utility\Deleted List.txt" />
-    <None Include="Assets\TileMap\Tilesets\crawl-tiles Oct-5-2010\crawl-tiles Oct-5-2010\utility\Filtered List.txt" />
-    <None Include="Assets\TileMap\Tilesets\crawl-tiles Oct-5-2010\crawl-tiles Oct-5-2010\utility\README.txt" />
-    <None Include="Assets\TileMap\Tilesets\crawl-tiles Oct-5-2010\crawl-tiles Oct-5-2010\utility\Raw List.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

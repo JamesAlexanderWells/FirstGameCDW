@@ -15,7 +15,7 @@ namespace Assets.Scripts.Rooms.TileMapRooms
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            if (OnEnterDoor != null)
+            if (OnEnterDoor != null && collision.gameObject.name == "dummyPlayer")
             {
                 var groundMap = GameObject.Find("Ground").GetComponent<Tilemap>();
                 Vector3 center = groundMap.CellToWorld(new Vector3Int(0, 0, 0));
