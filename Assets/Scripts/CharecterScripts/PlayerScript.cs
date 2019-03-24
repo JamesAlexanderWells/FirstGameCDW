@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour {
     private bool wallFreeE = true;
     public GameObject bullet;
     public GameObject pauseCanvas;
+    public GameObject deathCanvas;
     public int maxHealth;
     public int currentHealth;
     public float fireRate;
@@ -27,11 +28,15 @@ public class PlayerScript : MonoBehaviour {
     {
         Time.timeScale = 1;
         pauseCanvas.SetActive(isShowing);
+        deathCanvas.SetActive(false);
         anim = GetComponent<Animator>();
         startPos = this.transform.position;
         playerRigidbody2D.freezeRotation = true;
+        currentHealth = maxHealth;
     }
 
+
+ 
 
     void FixedUpdate()
     {
@@ -42,6 +47,7 @@ public class PlayerScript : MonoBehaviour {
         anim.SetBool("shootdown", false);
         playerMovement();
         playerShooting();
+        PlayerDeath();
     }
 
     private void Update()
@@ -164,6 +170,14 @@ public class PlayerScript : MonoBehaviour {
             }
         }
         playerRigidbody2D.velocity = new Vector3(x, y, 0);
+    }
+
+    void PlayerDeath() {
+        if (currentHealth <= 0) {
+            deathCanvas.SetActive(true);
+            Time.timeScale = 0;
+        }
+
     }
 
 }
