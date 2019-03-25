@@ -12,6 +12,8 @@ public class PlayerScript : MonoBehaviour {
     private bool wallFreeW = true;
     private bool wallFreeE = true;
     public GameObject bullet;
+    public GameObject pauseCanvas;
+    public GameObject deathCanvas;
     public int maxHealth;
     public int currentHealth;
     public float fireRate;
@@ -19,29 +21,57 @@ public class PlayerScript : MonoBehaviour {
     public List<PickUpScript> pickUpList = new List<PickUpScript>();
     Vector3 startPos;
     public Rigidbody2D playerRigidbody2D;
-    
+    private bool isShowing = false;
+
     // Use this for initialization
     void Start()
     {
+        Time.timeScale = 1;
+        pauseCanvas.SetActive(isShowing);
+        deathCanvas.SetActive(false);
         anim = GetComponent<Animator>();
         startPos = this.transform.position;
         playerRigidbody2D.freezeRotation = true;
+        currentHealth = maxHealth;
     }
 
 
+ 
+
     void FixedUpdate()
     {
+        
         anim.SetBool("ifwalk", false);
         anim.SetBool("shoot", false);
         anim.SetBool("walkdown", false);
         anim.SetBool("shootdown", false);
         playerMovement();
         playerShooting();
+        PlayerDeath();
+    }
+
+    private void Update()
+    {
+        PauseGame();
     }
 
 
-    
 
+    private void PauseGame() {
+        if (Input.GetKeyDown("escape") )
+        {
+            isShowing = !isShowing;
+            pauseCanvas.SetActive(!pauseCanvas.active);
+            if (pauseCanvas.active)
+            {
+                Time.timeScale = 0;
+            }
+            else {
+                Time.timeScale = 1;
+            }
+        }
+
+    }
 
     private void playerShooting()
     {
@@ -140,6 +170,14 @@ public class PlayerScript : MonoBehaviour {
             }
         }
         playerRigidbody2D.velocity = new Vector3(x, y, 0);
+    }
+
+    void PlayerDeath() {
+        if (currentHealth <= 0) {
+            deathCanvas.SetActive(true);
+            Time.timeScale = 0;
+        }
+
     }
 
 }

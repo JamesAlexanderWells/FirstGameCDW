@@ -34,10 +34,15 @@ public class BossScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         TakeDamage(col);
+    }
+
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
         DealDamage(col);
     }
 
-    
+
     public virtual void Movement()
     {
 
@@ -59,9 +64,9 @@ public class BossScript : MonoBehaviour
             Split = true;
         }
     }
-    public void DealDamage(Collider2D col)
+    public void DealDamage(Collision2D col)
     {
-        if (col.name.Contains("Player"))
+        if (col.gameObject.name.Contains("Player"))
         {
             player.GetComponent<PlayerScript>().currentHealth -= Damage;
         }

@@ -31,6 +31,10 @@ public class Fly : BossScript
     void OnTriggerEnter2D(Collider2D col)
     {
         TakeDamage(col);
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
         DealDamage(col);
     }
 

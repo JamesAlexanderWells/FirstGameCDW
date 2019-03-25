@@ -133,6 +133,8 @@
      <Compile Include="Assets\Scripts\BossScripts\Fly.cs" />
      <Compile Include="Assets\Scripts\BossScripts\Mantis.cs" />
      <Compile Include="Assets\Scripts\BossScripts\Worm.cs" />
+     <Compile Include="Assets\Scripts\ButtonScripts\MainMenuButtons.cs" />
+     <Compile Include="Assets\Scripts\ButtonScripts\PauseGameButtons.cs" />
      <Compile Include="Assets\Scripts\CharecterScripts\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\Enumerations\PreviousDoor.cs" />
      <Compile Include="Assets\Scripts\FollowCam.cs" />
