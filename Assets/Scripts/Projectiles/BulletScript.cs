@@ -59,7 +59,11 @@ public class BulletScript : MonoBehaviour
 
     private void changeBulletApperance()
     {
-        if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.fireBall))
+        if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.laser))
+        {
+            sRend.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().laserBullet;
+        }
+        else if (player.GetComponent<PlayerScript>().pickUpList.Any(f => f.pickUpName == PickUpScript.nameType.fireBall))
         {
             sRend.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().fireBallBullet;
         }
@@ -75,14 +79,7 @@ public class BulletScript : MonoBehaviour
         {
             sRend.sprite = bulletSpriteList.GetComponent<BulletSpriteList>().bouncyBullet;
         }
-
-
-
-
     }
-
-
-
 
     void timeOut()
     {
@@ -119,9 +116,7 @@ public class BulletScript : MonoBehaviour
                     break;
             }
         }
-
     }
-
     void OnTriggerEnter2D(Collider2D thing)
     {
         if (thing.name.Contains("Wall") || thing.name.Contains("Rock") || thing.tag == "Boss")

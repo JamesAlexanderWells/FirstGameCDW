@@ -7,4 +7,5 @@ public class BulletSpriteList : MonoBehaviour
     public Sprite bouncyBullet;
     public Sprite spectralBullet;
     public Sprite boomerangBullet;
+    public Sprite laserBullet;
 }

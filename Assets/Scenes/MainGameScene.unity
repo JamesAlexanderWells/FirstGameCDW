@@ -1024,6 +1024,7 @@ MonoBehaviour:
   squashBall: {fileID: 21300000, guid: 1b38db2431476f3499e378236455643c, type: 3}
   boomerang: {fileID: 21300000, guid: 6b860dd8eb592d844b680f393e9dba60, type: 3}
   dimensionPhase: {fileID: 21300000, guid: 1d20428b4958a50419cc4f2cfc8b2c68, type: 3}
+  laser: {fileID: 21300000, guid: 7c8cfc93de05f6d4fa80cf29b6cf78c6, type: 3}
 --- !u!4 &602276617
 Transform:
   m_ObjectHideFlags: 0
@@ -2367,6 +2368,7 @@ MonoBehaviour:
   bouncyBullet: {fileID: 21300000, guid: e732eb0ba4273fe4cb6fd4f0295fe6ef, type: 3}
   spectralBullet: {fileID: 21300000, guid: 822c891f5f23163489df5d567e0f16cc, type: 3}
   boomerangBullet: {fileID: 21300000, guid: 13735754ce457684f9565a261e4ab6d9, type: 3}
+  laserBullet: {fileID: 21300000, guid: 3a2fb87876407984b803b7f7b9f2b996, type: 3}
 --- !u!4 &1597176782
 Transform:
   m_ObjectHideFlags: 0

@@ -13,7 +13,8 @@ public class PickUpScript : MonoBehaviour
         kawabunga,
         dimensionPhase,
         squashBall,
-        boomerang
+        boomerang,
+        laser
     };
 
     public int healthIncrease;
@@ -64,6 +65,9 @@ public class PickUpScript : MonoBehaviour
                 break;
             case nameType.squashBall:
                 ownSprite.sprite = spriteList.GetComponent<PickUpSpriteList>().squashBall;
+                break;
+            case nameType.laser:
+                ownSprite.sprite = spriteList.GetComponent<PickUpSpriteList>().laser;
                 break;
         }
 
